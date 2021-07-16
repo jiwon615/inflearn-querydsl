@@ -14,7 +14,7 @@ public class Member {
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;
-    private String usename;
+    private String username;
     private int age;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -29,8 +29,8 @@ public class Member {
         this(username, age, null);
     }
 
-    public Member(String usename, int age, Team team) {
-        this.usename = usename;
+    public Member(String username, int age, Team team) {
+        this.username = username;
         this.age = age;
         if (team != null) {
             this.team = team;
