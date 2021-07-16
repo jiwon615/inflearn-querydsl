@@ -1,7 +1,7 @@
 package study.querydsl;
 
+import com.querydsl.core.QueryFactory;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 import study.querydsl.entity.Member;
-import study.querydsl.entity.QMember;
 import study.querydsl.entity.Team;
 
 import javax.persistence.EntityManager;
@@ -25,8 +24,11 @@ public class QuerydslBasicTest {
     @Autowired
     EntityManager em;
 
+    JPAQueryFactory queryFactory;
+
     @BeforeEach
     public void before() {
+        queryFactory = new JPAQueryFactory(em);
         Team teamA = new Team("teamA");
         Team teamB = new Team("teamB");
         em.persist(teamA);
@@ -45,16 +47,16 @@ public class QuerydslBasicTest {
     @Test
     public void startJPQL() {
         Member findMember = em.createQuery("select m from Member m where m.username = :username", Member.class)
-                .setParameter("username","member1")
+                .setParameter("username", "member1")
                 .getSingleResult();
         assertThat(findMember).isEqualTo("member1");
     }
 
     @Test
     public void startQuerydsl() {
-        JPAQueryFactory queryFactory = new JPAQueryFactory((em));
-       // QMember m = new QMember("m");
-      //  QMember m = QMember.member;
+       // JPAQueryFactory queryFactory = new JPAQueryFactory((em));
+        // QMember m = new QMember("m");
+        //  QMember m = QMember.member;
 
         Member findMember = queryFactory
                 .select(member)
@@ -62,5 +64,27 @@ public class QuerydslBasicTest {
                 .where(member.username.eq("member1"))
                 .fetchOne();
         assertThat(findMember.getUsername()).isEqualTo("member1");
+    }
+
+    @Test
+    public void search() {
+
+        // 방법1. AND 조건 사용
+        Member findMember = queryFactory
+                .selectFrom(member)
+                .where(member.username.eq("member1")
+                        .and(member.age.between(10, 30)))
+                .fetchOne();
+        assertThat(findMember.getUsername()).isEqualTo("member1");
+
+        // 방법2. 파라미터로 검색조건 추가하면 AND 주건이 추가됨
+        Member findMember1 = queryFactory
+                .selectFrom(member)
+                .where(
+                        member.username.eq("member1"),
+                        member.age.between(10, 30)
+                )
+                .fetchOne();
+        assertThat(findMember1.getUsername()).isEqualTo("member1");
     }
 }
