@@ -1,6 +1,7 @@
 package study.querydsl;
 
 import com.querydsl.core.QueryFactory;
+import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,9 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 import study.querydsl.entity.Member;
+import study.querydsl.entity.QMember;
 import study.querydsl.entity.Team;
 
 import javax.persistence.EntityManager;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static study.querydsl.entity.QMember.member;
@@ -86,5 +90,68 @@ public class QuerydslBasicTest {
                 )
                 .fetchOne();
         assertThat(findMember1.getUsername()).isEqualTo("member1");
+    }
+
+    @Test
+    public void resultFetch() {
+        // 리스트
+        List<Member> list = queryFactory
+                .selectFrom(member)
+                .fetch();
+
+        // 단 건 조회
+        Member fetchOne = queryFactory
+                .selectFrom(member)
+                .fetchOne();
+
+        // 처음 한 건 조회
+        Member fetchFirst = queryFactory
+                .selectFrom(QMember.member)
+                .fetchFirst(); // limit(1).fetchOne() 과 동일
+
+        // 페이징에서 사용 (results에 limit, offset, total(전체카운트), results (총 4명 데이터) 있음)
+        QueryResults<Member> results = queryFactory
+                .selectFrom(QMember.member)
+                .fetchResults();
+        List<Member> content = results.getResults();
+
+        // count 쿼리로 변경
+        long total = queryFactory
+                .selectFrom(member)
+                .fetchCount();
+    }
+
+    @Test
+    public void sort() {
+        em.persist(new Member(null, 100));
+        em.persist(new Member("member5", 100));
+        em.persist(new Member("member6", 100));
+
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .where(member.age.eq(100))
+                .orderBy(member.age.desc(), member.username.asc().nullsLast())
+                .fetch();
+
+        Member member5 = result.get(0);
+        Member member6 = result.get(1);
+        Member memberNull = result.get(2);
+        assertThat(member5.getUsername()).isEqualTo("member5");
+        assertThat(member6.getUsername()).isEqualTo("member6");
+        assertThat(memberNull.getUsername()).isNull();
+    }
+
+    @Test
+    public void paging() {
+        QueryResults<Member> results = queryFactory
+                .selectFrom(member)
+                .orderBy(member.username.desc())
+                .offset(1)
+                .limit(2)
+                .fetchResults();
+        assertThat(results.getTotal()).isEqualTo(4);
+        assertThat(results.getLimit()).isEqualTo(2);
+        assertThat(results.getOffset()).isEqualTo(1);
+        assertThat(results.getResults().size()).isEqualTo(2);
     }
 }
