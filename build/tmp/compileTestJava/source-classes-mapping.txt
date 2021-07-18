@@ -1,0 +1,6 @@
+study/querydsl/entity/MemberTest.java
+ study.querydsl.entity.MemberTest
+study/querydsl/QuerydslApplicationTests.java
+ study.querydsl.QuerydslApplicationTests
+study/querydsl/QuerydslBasicTest.java
+ study.querydsl.QuerydslBasicTest
