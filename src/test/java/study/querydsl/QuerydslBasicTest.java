@@ -3,6 +3,7 @@ package study.querydsl;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.CaseBuilder;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -382,4 +383,53 @@ public class QuerydslBasicTest {
 
         result.forEach(m -> System.out.println("m = " + m));
     }
+
+    @Test
+    public void constant() {
+        List<Tuple> result = queryFactory
+                .select(member.username, Expressions.constant("A"))
+                .from(member)
+                .fetch();
+
+        result.forEach(m -> System.out.println("m = " + m));
+    }
+
+    @Test
+    public void concat() {
+        List<String> result = queryFactory
+                .select(member.username.concat("_").concat(member.age.stringValue()))
+                .from(member)
+                .where(member.username.eq("member1"))
+                .fetch();
+
+        result.forEach(m -> System.out.println("m = " + m));
+    }
+
+    @Test
+    public void simpleProjection() {
+        List<String> result = queryFactory
+                .select(member.username)
+                .from(member)
+                .fetch();
+        result.forEach(m -> {
+            System.out.println("m = " + m);
+        });
+    }
+
+    @Test
+    public void tupleProjection() {
+        List<Tuple> result = queryFactory
+                .select(member.username, member.age)  // 타입이 여러개(num, string)면 튜블 타입반환
+                .from(member)
+                .fetch();
+
+        result.forEach(m -> {
+            String username = m.get(member.username);
+            Integer age = m.get(member.age);
+            System.out.println("username = " + username);
+            System.out.println("age = " + age);
+        });
+
+    }
+
 }
