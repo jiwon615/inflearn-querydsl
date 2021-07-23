@@ -600,7 +600,7 @@ public class QuerydslBasicTest {
         List<String> result = queryFactory
                 .select(Expressions.stringTemplate(
                         "function('replace', {0}, {1}, {2})",
-                        member.username, "member", "M"
+                        member.username, "member", "M"  // member.username이 "member"인 것을 M으로 변경
                 ))
                 .from(member)
                 .fetch();
@@ -615,7 +615,7 @@ public class QuerydslBasicTest {
 //                .where(member.username.eq(
 //                        Expressions.stringTemplate("function('lower', {0})", member.username)
 //                ))
-                .where(member.username.eq(member.username.lower()))
+                .where(member.username.eq(member.username.lower()))  // 소문자로 변경해서 비교해랴
                 .fetch();
 
         result.forEach(m -> System.out.println("m = " + m));
