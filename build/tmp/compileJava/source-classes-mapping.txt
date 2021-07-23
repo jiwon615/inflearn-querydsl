@@ -1,7 +1,13 @@
+study/querydsl/dto/UserDto.java
+ study.querydsl.dto.UserDto
 study/querydsl/entity/QHello.java
  study.querydsl.entity.QHello
 study/querydsl/entity/Member.java
  study.querydsl.entity.Member
+study/querydsl/dto/MemberDto.java
+ study.querydsl.dto.MemberDto
+study/querydsl/dto/QMemberDto.java
+ study.querydsl.dto.QMemberDto
 study/querydsl/entity/Hello.java
  study.querydsl.entity.Hello
 study/querydsl/entity/QTeam.java
@@ -14,9 +20,3 @@ study/querydsl/entity/Team.java
  study.querydsl.entity.Team
 study/querydsl/controller/HelloController.java
  study.querydsl.controller.HelloController
-study/querydsl/dto/UserDto.java
- study.querydsl.dto.UserDto
-study/querydsl/dto/MemberDto.java
- study.querydsl.dto.MemberDto
-study/querydsl/dto/QMemberDto.java
- study.querydsl.dto.QMemberDto
