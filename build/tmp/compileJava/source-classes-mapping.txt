@@ -20,5 +20,11 @@ study/querydsl/entity/QMember.java
  study.querydsl.entity.QMember
 study/querydsl/entity/Team.java
  study.querydsl.entity.Team
+study/querydsl/dto/QMemberTeamDto.java
+ study.querydsl.dto.QMemberTeamDto
+study/querydsl/dto/MemberSearchCondition.java
+ study.querydsl.dto.MemberSearchCondition
+study/querydsl/dto/MemberTeamDto.java
+ study.querydsl.dto.MemberTeamDto
 study/querydsl/repository/MemberJpaRepository.java
  study.querydsl.repository.MemberJpaRepository
