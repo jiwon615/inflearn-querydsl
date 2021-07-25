@@ -1,6 +1,8 @@
+study/querydsl/QuerydslBasicTest.java
+ study.querydsl.QuerydslBasicTest
 study/querydsl/entity/MemberTest.java
  study.querydsl.entity.MemberTest
 study/querydsl/QuerydslApplicationTests.java
  study.querydsl.QuerydslApplicationTests
-study/querydsl/QuerydslBasicTest.java
- study.querydsl.QuerydslBasicTest
+study/querydsl/repository/MemberJpaRepositoryTest.java
+ study.querydsl.repository.MemberJpaRepositoryTest

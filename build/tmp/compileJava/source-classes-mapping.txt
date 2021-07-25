@@ -14,9 +14,11 @@ study/querydsl/entity/QTeam.java
  study.querydsl.entity.QTeam
 study/querydsl/QuerydslApplication.java
  study.querydsl.QuerydslApplication
+study/querydsl/controller/HelloController.java
+ study.querydsl.controller.HelloController
 study/querydsl/entity/QMember.java
  study.querydsl.entity.QMember
 study/querydsl/entity/Team.java
  study.querydsl.entity.Team
-study/querydsl/controller/HelloController.java
- study.querydsl.controller.HelloController
+study/querydsl/repository/MemberJpaRepository.java
+ study.querydsl.repository.MemberJpaRepository
