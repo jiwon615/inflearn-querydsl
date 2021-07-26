@@ -28,3 +28,8 @@ study/querydsl/dto/MemberTeamDto.java
  study.querydsl.dto.MemberTeamDto
 study/querydsl/repository/MemberJpaRepository.java
  study.querydsl.repository.MemberJpaRepository
+study/querydsl/controller/InitMember.java
+ study.querydsl.controller.InitMember
+ study.querydsl.controller.InitMember$InitMemberService
+study/querydsl/controller/MemberController.java
+ study.querydsl.controller.MemberController
