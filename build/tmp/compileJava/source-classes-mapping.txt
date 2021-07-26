@@ -33,3 +33,9 @@ study/querydsl/controller/InitMember.java
  study.querydsl.controller.InitMember$InitMemberService
 study/querydsl/controller/MemberController.java
  study.querydsl.controller.MemberController
+study/querydsl/repository/MemberRepositoryImpl.java
+ study.querydsl.repository.MemberRepositoryImpl
+study/querydsl/repository/MemberRepository.java
+ study.querydsl.repository.MemberRepository
+study/querydsl/repository/MemberRepositoryCustom.java
+ study.querydsl.repository.MemberRepositoryCustom

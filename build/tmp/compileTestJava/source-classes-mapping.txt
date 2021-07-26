@@ -6,3 +6,5 @@ study/querydsl/QuerydslApplicationTests.java
  study.querydsl.QuerydslApplicationTests
 study/querydsl/repository/MemberJpaRepositoryTest.java
  study.querydsl.repository.MemberJpaRepositoryTest
+study/querydsl/repository/MemberRepositoryTest.java
+ study.querydsl.repository.MemberRepositoryTest
