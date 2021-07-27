@@ -25,7 +25,8 @@ public class MemberController {
         return memberJpaRepository.searchByBuilder2(condition);
     }
 
-    @GetMapping("/v2/members")
+    // 페이징
+   @GetMapping("/v2/members")
     public Page<MemberTeamDto> searchMemberV2(MemberSearchCondition condition, Pageable pageable) {
         return memberRepository.searchPageSimple(condition, pageable);
     }
